@@ -5,7 +5,7 @@ export const userService = {
     getAll
 };
 
-function getAll() {
+function getAll(endpoint) {
     const requestOptions = { method: 'GET', headers: authHeader() };
-    return fetch(`${config.apiUrl}/user/`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl + endpoint}`, requestOptions).then(handleResponse);
 }

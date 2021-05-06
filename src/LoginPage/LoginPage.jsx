@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="col-md-6 offset-md-3">
                 <h2>Login</h2>
                 <Formik
                     initialValues={{

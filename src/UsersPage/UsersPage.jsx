@@ -13,7 +13,7 @@ class UsersPage extends React.Component {
     }
 
     componentDidMount() {
-        userService.getAll().then(users => this.setState({ users }));
+        userService.getAll("/user/").then(users => this.setState({ users }));
     }
 
     render() {
