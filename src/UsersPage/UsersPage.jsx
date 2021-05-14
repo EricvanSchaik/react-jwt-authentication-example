@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { userService } from '@/_services';
+import { performFetch } from '@/_services';
 import { getDate } from '@/_helpers';
 
 class UsersPage extends React.Component {
@@ -13,7 +13,7 @@ class UsersPage extends React.Component {
     }
 
     componentDidMount() {
-        userService.getAll("/user/").then(users => this.setState({ users }));
+        performFetch("/user/").then(users => this.setState({ users }));
     }
 
     render() {

@@ -3,8 +3,6 @@ import { render } from 'react-dom';
 
 import { App } from './App';
 
-// setup fake backend
-
 render(
     <App />,
     document.getElementById('app')
