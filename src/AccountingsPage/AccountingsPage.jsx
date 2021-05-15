@@ -8,7 +8,8 @@ class AccountingsPage extends React.Component {
 
         this.state = {
             accountings: null,
-            users: null
+            users: null,
+            currentAccounting: 0
         };
     }
 
@@ -17,8 +18,12 @@ class AccountingsPage extends React.Component {
         performFetch("/user/get-all").then(users => this.setState({ users }));
     }
 
+    selectAccounting(index) {
+        this.setState({ currentAccounting: index })
+    }
+
     render() {
-        const { accountings, users } = this.state;
+        const { accountings, users, currentAccounting } = this.state;
         return (
             <div className="container">
                 { accountings && users && 
@@ -31,11 +36,11 @@ class AccountingsPage extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.accountings[0].users.map(user => (
+                            {this.state.accountings[currentAccounting].users.map(user => (
                                 <tr>
                                     <td>{this.state.users.find(u => u.id === user).firstName}</td>
-                                    <td>{this.state.accountings[0].payedBy[user]}</td>
-                                    <td>{this.state.accountings[0].payedFor[user]}</td>
+                                    <td>{this.state.accountings[currentAccounting].payedBy[user]}</td>
+                                    <td>{this.state.accountings[currentAccounting].payedFor[user]}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -43,7 +48,7 @@ class AccountingsPage extends React.Component {
                 }
                 <ul className="list-group">
                     { accountings && this.state.accountings.map(accounting => (
-                        <li className="list-group-item">Accounting of {accounting.month} - {accounting.year}</li>
+                        <li className="list-group-item" onClick={this.selectAccounting.bind(this, accountings.findIndex(a => a === accounting))}>Accounting of {accounting.month} - {accounting.year}</li>
                     ))}
                 </ul>
             </div>
