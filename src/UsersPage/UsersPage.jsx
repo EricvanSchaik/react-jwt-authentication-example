@@ -32,7 +32,7 @@ class UsersPage extends React.Component {
                     <tbody>
                     {users && this.state.users.map(user => (
                         (<tr>
-                            <th scope="row"></th>
+                            <td/>
                             <td>{user.firstName + " " + user.lastName}</td>
                             <td>{getDate(user.movedIn)}</td>
                             <td>{getDate(user.movedOut)}</td>

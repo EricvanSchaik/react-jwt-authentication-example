@@ -25,13 +25,13 @@ module.exports = {
     })],
     devServer: {
         historyApiFallback: true,
-        host: '130.89.163.5',
+        host: '130.89.178.57',
         disableHostCheck: true
     },
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://130.89.163.5:8080'
+            apiUrl: 'http://130.89.178.57:8080'
         })
     }
 }
