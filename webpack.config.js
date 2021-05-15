@@ -24,12 +24,14 @@ module.exports = {
         template: './src/index.html'
     })],
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        host: '130.89.163.5',
+        disableHostCheck: true
     },
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://localhost:8080'
+            apiUrl: 'http://130.89.163.5:8080'
         })
     }
 }
