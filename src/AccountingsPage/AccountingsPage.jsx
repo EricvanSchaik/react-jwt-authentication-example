@@ -26,6 +26,7 @@ class AccountingsPage extends React.Component {
         const { accountings, users, currentAccounting } = this.state;
         return (
             <div className="container">
+                { accountings && <h2>Accounting of {this.state.accountings[currentAccounting].month} - {this.state.accountings[currentAccounting].year}</h2>}
                 { accountings && users && 
                     <table className="table">
                         <thead>
