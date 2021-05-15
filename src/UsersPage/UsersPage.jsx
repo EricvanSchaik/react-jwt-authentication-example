@@ -13,7 +13,7 @@ class UsersPage extends React.Component {
     }
 
     componentDidMount() {
-        performFetch("/user/").then(users => this.setState({ users }));
+        performFetch("/user/get-all").then(users => this.setState({ users }));
     }
 
     render() {

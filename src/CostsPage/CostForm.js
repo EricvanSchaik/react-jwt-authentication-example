@@ -1,6 +1,5 @@
 import React from 'react';
 import { performFetch } from '@/_services';
-import { Redirect } from 'react-router-dom';
 
 class CostForm extends React.Component {
 

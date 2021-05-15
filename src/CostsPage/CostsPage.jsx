@@ -12,21 +12,26 @@ class CostsPage extends React.Component {
             activePage: 0,
             users: [0],
             currentUsers: [0],
-            clubs: {}
+            clubs: {},
+            authUser: JSON.parse(localStorage.getItem('currentUser'))
         };
         this.refreshCosts = this.refreshCosts.bind(this);
     }
     
     componentDidMount() {
-        performFetch('/costs/').then(costs => this.setState({ costs }));
-        performFetch('/user/').then(users => this.setState({ users }));
+        performFetch('/costs/get-all').then(costs => this.setState({ costs }));
+        performFetch('/user/get-all').then(users => this.setState({ users }));
         performFetch('/user/current').then(currentUsers => this.setState({ currentUsers }));
         performFetch('/club/current').then(clubs => this.setState({ clubs }));
     }
 
     refreshCosts() {
-        performFetch('/costs/').then(costs => this.setState({ costs }));
-        console.log(this.state.costs);
+        performFetch('/costs/get-all').then(costs => this.setState({ costs }));
+    }
+
+    deleteCost(costId) {
+        performFetch("/costs/deleteCost", costId );
+        window.location.reload();
     }
 
     render() {
@@ -41,6 +46,9 @@ class CostsPage extends React.Component {
                         <th scope="col">Description</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Date</th>
+                        {this.state.authUser.role === "ADMIN" &&
+                            <th scope="col"></th>
+                        }
                     </tr>
                     </thead>
                     <tbody>
@@ -52,6 +60,11 @@ class CostsPage extends React.Component {
                             <td>{cost.description}</td>
                             <td>{cost.amount}</td>
                             <td width="15%">{getDate(cost.timestamp)}</td>
+                            {this.state.authUser.role === "ADMIN" &&
+                                <td>
+                                    <button class="btn btn-primary" onClick={this.deleteCost.bind(this, cost.id)}>Delete</button>
+                                </td>
+                            }
                         </tr>)
                     ))}
                     </tbody>
