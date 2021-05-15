@@ -22,12 +22,12 @@ class UsersPage extends React.Component {
             <div className="container">
                 <table className='table'>
                     <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" width={"60%"}>Name</th>
-                        <th scope="col">Moved In</th>
-                        <th scope="col">Moved Out</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col" width={"60%"}>Name</th>
+                            <th scope="col">Moved In</th>
+                            <th scope="col">Moved Out</th>
+                        </tr>
                     </thead>
                     <tbody>
                     {users && this.state.users.map(user => (
