@@ -33,16 +33,22 @@ class AccountingsPage extends React.Component {
                                 <th>User</th>
                                 <th>Payed By</th>
                                 <th>Payed For</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.accountings[currentAccounting].users.map(user => (
+                            {this.state.accountings[currentAccounting].users.map(user => {
+                                const payedBy = this.state.accountings[currentAccounting].payedBy[user];
+                                const payedFor = this.state.accountings[currentAccounting].payedFor[user];
+                                return (
                                 <tr>
                                     <td>{this.state.users.find(u => u.id === user).firstName}</td>
-                                    <td>{this.state.accountings[currentAccounting].payedBy[user]}</td>
-                                    <td>{this.state.accountings[currentAccounting].payedFor[user]}</td>
+                                    <td>{payedBy}</td>
+                                    <td>{payedFor}</td>
+                                    <td>{Math.round((payedBy - payedFor)*100) / 100}</td>
                                 </tr>
-                            ))}
+                                )
+                            })}
                         </tbody>
                     </table>
                 }
