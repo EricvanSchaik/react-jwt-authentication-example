@@ -36,7 +36,9 @@ class App extends React.Component {
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
                             <div className="navbar-nav">
                                 <Link to="/" className="nav-item nav-link">Home</Link>
-                                <Link to="/users" className="nav-item nav-link">Users</Link>
+                                {currentUser.role === "ADMIN" &&
+                                    <Link to="/users" className="nav-item nav-link">Users</Link>
+                                }
                                 <Link to="/costs" className="nav-item nav-link">Costs</Link>
                                 <a onClick={this.logout} className="nav-item nav-link">Logout</a>
                             </div>
