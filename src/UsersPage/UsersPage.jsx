@@ -2,6 +2,7 @@ import React from 'react';
 
 import { performFetch } from '@/_services';
 import { getDate } from '@/_helpers';
+import UsersForm from './UsersForm';
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -16,10 +17,16 @@ class UsersPage extends React.Component {
         performFetch("/user/get-all").then(users => this.setState({ users }));
     }
 
+    deleteUser(userId) {
+        performFetch("/user/delete", userId );
+        window.location.reload();
+    }
+
     render() {
         const { users } = this.state;
         return (
             <div className="container">
+                <h2>Users</h2>
                 <table className='table'>
                     <thead>
                         <tr>
@@ -36,10 +43,15 @@ class UsersPage extends React.Component {
                             <td>{user.firstName + " " + user.lastName}</td>
                             <td>{getDate(user.movedIn)}</td>
                             <td>{getDate(user.movedOut)}</td>
+                            <td>
+                                <button class="btn btn-primary" onClick={this.deleteUser.bind(this, user.id)}>Delete</button>
+                            </td>
                         </tr>)
                     ))}
                     </tbody>
                 </table>
+                <h2>Add New User</h2>
+                <UsersForm/>
             </div>
         );
     }
