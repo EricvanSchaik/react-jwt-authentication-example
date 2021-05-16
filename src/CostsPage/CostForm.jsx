@@ -70,7 +70,7 @@ class CostForm extends React.Component {
                         <label htmlFor="payerId">What is your name?</label>
                         <select className="form-control" id="payerId" name="payerId" onChange={this.handleChange}>
                             {
-                                this.props.users.map(user => (
+                                this.props.users.filter(u => u.firstName !== "Flatkas").map(user => (
                                     <option value={user.id}>{user.firstName}</option>
                                 ))
                             }
