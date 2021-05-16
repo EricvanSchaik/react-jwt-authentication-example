@@ -43,7 +43,7 @@ class EditUsersForm extends React.Component {
         return (
             <div className="container">
                 {this.props.users && 
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="userId">Which user do you want to edit?</label>
                             <select className="form-control" id="userId" name="userId" onChange={this.handleChange}>
@@ -70,7 +70,7 @@ class EditUsersForm extends React.Component {
                             <label htmlFor="description">Moved Out</label>
                             <input className="form-control" id="movedOut" type="date" value={this.state.movedOut} name="movedOut" onChange={this.handleChange}></input>
                         </div>
-                        <button className="btn btn-primary" type="submit" key="submit" onClick={this.handleSubmit}>Submit</button>
+                        <button className="btn btn-primary" type="submit" key="submit">Submit</button>
                     </form>
                 }
             </div>

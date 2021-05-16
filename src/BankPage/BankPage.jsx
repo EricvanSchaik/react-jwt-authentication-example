@@ -3,6 +3,7 @@ import React from 'react';
 import { performFetch } from '@/_services';
 import { getDate } from '@/_helpers';
 import "./Bankpage.css";
+import MutationForm from './MutationForm';
 
 class BankPage extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class BankPage extends React.Component {
     this.state = {
       mutations: null,
       users: null,
-      saldi: null
+      saldi: null,
+      authUser: JSON.parse(localStorage.getItem('currentUser')),
     };
   }
 
@@ -19,6 +21,11 @@ class BankPage extends React.Component {
     performFetch("/bank/get-all").then(mutations => this.setState({ mutations }));
     performFetch("/user/get-all").then(users => this.setState({ users }));
     performFetch("/bank/current-saldi").then(saldi => this.setState({ saldi }));
+  }
+
+  deleteMutation(mutationId) {
+    performFetch("/bank/delete-mutation", mutationId );
+    window.location.reload();
   }
 
   render() {
@@ -43,6 +50,10 @@ class BankPage extends React.Component {
           </tbody>
         </table>
 
+        { this.state.authUser.role === "ADMIN" &&
+          <MutationForm users={this.state.users}/>
+        }
+
         <h2>Mutations</h2>
         <table className="table">
           <thead>
@@ -51,6 +62,9 @@ class BankPage extends React.Component {
               <th>Amount</th>
               <th>Label</th>
               <th>Date</th>
+              {this.state.authUser.role === "ADMIN" &&
+                <th scope="col"></th>
+              }
             </tr>
           </thead>
           <tbody>
@@ -60,6 +74,11 @@ class BankPage extends React.Component {
                 <td>{mutation.amount}</td>
                 <td>{mutation.label}</td>
                 <td>{getDate(mutation.timestamp)}</td>
+                {this.state.authUser.role === "ADMIN" &&
+                  <td>
+                      <button class="btn btn-primary" onClick={this.deleteMutation.bind(this, mutation.id)}>Delete</button>
+                  </td>
+                }
               </tr>
             ))}
           </tbody>

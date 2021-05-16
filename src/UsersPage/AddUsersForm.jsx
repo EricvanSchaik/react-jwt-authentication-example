@@ -33,7 +33,7 @@ class AddUsersForm extends React.Component {
     render() {
         return (
             <div className="container">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div className="form-group" key="firstName">
                         <label htmlFor="description">First Name</label>
                         <input className="form-control" id="firstName" type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange} required></input>
@@ -50,7 +50,7 @@ class AddUsersForm extends React.Component {
                         <label htmlFor="description">Has he/she already moved out? If so, when?</label>
                         <input className="form-control" id="movedOut" type="date" value={this.state.movedOut} name="movedOut" onChange={this.handleChange}></input>
                     </div>
-                    <button className="btn btn-primary" type="submit" key="submit" onClick={this.handleSubmit}>Submit</button>
+                    <button className="btn btn-primary" type="submit" key="submit">Submit</button>
                 </form>
             </div>
         )
