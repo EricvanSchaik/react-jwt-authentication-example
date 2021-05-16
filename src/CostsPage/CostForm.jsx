@@ -12,7 +12,8 @@ class CostForm extends React.Component {
             amount: null,
             durationMonths: null,
             timestamp: new Date(),
-            payedFor: null
+            payedFor: null,
+            authUser: JSON.parse(localStorage.getItem('currentUser'))
         };
 
         this.state = this.emptyCost;
@@ -44,7 +45,12 @@ class CostForm extends React.Component {
     }
 
     handleSubmit() {
-        performFetch('/costs/addCost', this.state);
+        if (this.state.authUser.role === "ADMIN") {
+            performFetch('/costs/addCostAsAdmin', this.state);
+        }
+        else {
+            performFetch('/costs/addCost', this.state);
+        }
     }
 
     componentDidUpdate() {

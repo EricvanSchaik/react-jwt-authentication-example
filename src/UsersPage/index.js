@@ -1,2 +1,3 @@
 export * from './UsersPage';
-export * from './UsersForm';
+export * from './AddUsersForm';
+export * from './EditUsersForm';

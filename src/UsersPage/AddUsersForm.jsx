@@ -2,7 +2,7 @@ import React from 'react';
 
 import { performFetch } from '@/_services';
 
-class UsersForm extends React.Component {
+class AddUsersForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -57,4 +57,4 @@ class UsersForm extends React.Component {
     }
 }
 
-export default UsersForm;
+export default AddUsersForm;

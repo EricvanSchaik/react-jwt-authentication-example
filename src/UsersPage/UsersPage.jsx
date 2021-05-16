@@ -2,7 +2,8 @@ import React from 'react';
 
 import { performFetch } from '@/_services';
 import { getDate } from '@/_helpers';
-import UsersForm from './UsersForm';
+import AddUsersForm from './AddUsersForm';
+import EditUsersForm from './EditUsersForm';
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -51,7 +52,9 @@ class UsersPage extends React.Component {
                     </tbody>
                 </table>
                 <h2>Add New User</h2>
-                <UsersForm/>
+                <AddUsersForm/>
+                <h2 style={{'margin-top': '20px'}}>Edit User</h2>
+                <EditUsersForm users={this.state.users}/>
             </div>
         );
     }
