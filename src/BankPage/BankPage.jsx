@@ -33,11 +33,11 @@ class BankPage extends React.Component {
               <th scope="col">Current Saldo</th>
             </tr>
           </thead>
-          <tbody>
-            { mutations && users && saldi && this.state.users.map(user => (
+          <tbody> 
+            { mutations && users && saldi && Object.keys(saldi).map(userId => (
               <tr>
-                <td scope="row">{user.firstName}</td>
-                <td scope="row">{Math.round(saldi[user.id] * 100) / 100}</td>
+                <td scope="row">{users.find(u => u.id == userId).firstName}</td>
+                <td scope="row">{Math.round(saldi[userId] * 100) / 100}</td>
               </tr>
             ))}
           </tbody>
@@ -54,9 +54,9 @@ class BankPage extends React.Component {
             </tr>
           </thead>
           <tbody>
-            { mutations && users && this.state.mutations.map(mutation => (
+            { mutations && users && mutations.map(mutation => (
               <tr>
-                <td>{this.state.users.find(u => u.id === mutation.userId).firstName}</td>
+                <td>{users.find(u => u.id === mutation.userId).firstName}</td>
                 <td>{mutation.amount}</td>
                 <td>{mutation.label}</td>
                 <td>{getDate(mutation.timestamp)}</td>

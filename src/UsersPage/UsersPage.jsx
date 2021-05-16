@@ -45,7 +45,7 @@ class UsersPage extends React.Component {
                             <td>{getDate(user.movedIn)}</td>
                             <td>{getDate(user.movedOut)}</td>
                             <td>
-                                <button class="btn btn-primary" onClick={this.deleteUser.bind(this, user.id)}>Delete</button>
+                                <button className="btn btn-primary" onClick={this.deleteUser.bind(this, user.id)}>Delete</button>
                             </td>
                         </tr>)
                     ))}
@@ -53,7 +53,7 @@ class UsersPage extends React.Component {
                 </table>
                 <h2>Add New User</h2>
                 <AddUsersForm/>
-                <h2 style={{'margin-top': '20px'}}>Edit User</h2>
+                <h2 style={{marginTop: '20px'}}>Edit User</h2>
                 <EditUsersForm users={this.state.users}/>
             </div>
         );

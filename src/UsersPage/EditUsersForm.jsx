@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { performFetch } from '@/_services';
+
+
 class EditUsersForm extends React.Component {
     constructor(props) {
         super(props);
@@ -13,6 +16,7 @@ class EditUsersForm extends React.Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -31,6 +35,10 @@ class EditUsersForm extends React.Component {
         }
     }
 
+    handleSubmit() {
+        performFetch('/user/edit', this.state);
+    }
+
     render() {
         return (
             <div className="container">
@@ -46,7 +54,23 @@ class EditUsersForm extends React.Component {
                                 }
                             </select>
                         </div>
-                        <button className="btn btn-primary" type="submit" key="submit">Submit</button>
+                        <div className="form-group" key="firstName">
+                            <label htmlFor="description">First Name</label>
+                            <input className="form-control" id="firstName" type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="form-group" key="lastName">
+                            <label htmlFor="description">Last Name</label>
+                            <input className="form-control" id="lastName" type="text" value={this.state.lastName} name="lastName" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="form-group" key="movedIn">
+                            <label htmlFor="description">Moved In</label>
+                            <input className="form-control" id="movedIn" type="date" value={this.state.movedIn} name="movedIn" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="form-group" key="movedOut">
+                            <label htmlFor="description">Moved Out</label>
+                            <input className="form-control" id="movedOut" type="date" value={this.state.movedOut} name="movedOut" onChange={this.handleChange}></input>
+                        </div>
+                        <button className="btn btn-primary" type="submit" key="submit" onClick={this.handleSubmit}>Submit</button>
                     </form>
                 }
             </div>
