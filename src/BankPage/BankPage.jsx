@@ -2,6 +2,7 @@ import React from 'react';
 
 import { performFetch } from '@/_services';
 import { getDate } from '@/_helpers';
+import "./Bankpage.css";
 
 class BankPage extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class BankPage extends React.Component {
     return (
       <div className="container">
         <h2>Current Saldi</h2>
-        <table className="table">
+        <table className="table table-bordered">
           <thead>
             <tr>
               <th scope="col">User</th>
