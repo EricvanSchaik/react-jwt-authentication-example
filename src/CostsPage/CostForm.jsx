@@ -56,7 +56,7 @@ class CostForm extends React.Component {
     componentDidUpdate() {
         if (this.state.payerId === null && this.props.users[0].id !== undefined) {
             this.setState({
-                payerId: this.props.users[0].id,
+                payerId: this.props.users[1].id,
                 payedFor: this.props.users.map(user => user.id)
             })
         }
