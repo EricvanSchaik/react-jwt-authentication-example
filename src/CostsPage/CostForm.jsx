@@ -7,12 +7,12 @@ class CostForm extends React.Component {
         super(props);
 
         this.emptyCost = {
-            payerId: 0,
-            description: "",
-            amount: 0,
-            durationMonths: 0,
+            payerId: null,
+            description: null,
+            amount: null,
+            durationMonths: null,
             timestamp: new Date(),
-            payedFor: [0]
+            payedFor: null
         };
 
         this.state = this.emptyCost;
@@ -43,21 +43,12 @@ class CostForm extends React.Component {
         }
     }
 
-    handleSubmit(event) {
+    handleSubmit() {
         performFetch('/costs/addCost', this.state);
-        this.setState({
-            payerId: this.props.users[0].id,
-            description: "",
-            amount: 0,
-            durationMonths: 0,
-            timestamp: new Date(),
-            payedFor: this.props.users.map(user => user.id)
-        });
-        console.log("redirecting");
     }
 
     componentDidUpdate() {
-        if (this.state.payerId === 0 && this.props.users[0].id !== undefined) {
+        if (this.state.payerId === null && this.props.users[0].id !== undefined) {
             this.setState({
                 payerId: this.props.users[0].id,
                 payedFor: this.props.users.map(user => user.id)
@@ -81,11 +72,11 @@ class CostForm extends React.Component {
                     </div>
                     <div className="form-group" key="description">
                         <label htmlFor="description">What did you buy?</label>
-                        <input className="form-control" id="description" type="text" value={this.state.description} name="description" onChange={this.handleChange}></input>
+                        <input className="form-control" id="description" type="text" value={this.state.description} name="description" onChange={this.handleChange} required></input>
                     </div>
                     <div className="form-group" key="amount">
                         <label htmlFor="amount">For how much did you buy it?</label>
-                        <input className="form-control" id="amount" type="number" name="amount" min="0" step=".01" onChange={this.handleChange}></input>
+                        <input className="form-control" id="amount" type="number" name="amount" min="0" step=".01" onChange={this.handleChange} required></input>
                     </div>
                     <div className="form-group" key="payedFor">
                         <label htmlFor="payedFor">For who did you buy it?</label>
