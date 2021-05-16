@@ -6,19 +6,20 @@ class CostForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.emptyCost = {
+        this.state = {
             payerId: null,
             description: null,
             amount: null,
             durationMonths: null,
             timestamp: new Date(),
             payedFor: null,
-            authUser: JSON.parse(localStorage.getItem('currentUser'))
+            authUser: JSON.parse(localStorage.getItem('currentUser')),
+            periodic: false
         };
 
-        this.state = this.emptyCost;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleCheckbox = this.handleCheckbox.bind(this);
     }
 
     handleChange(event) {
@@ -27,6 +28,15 @@ class CostForm extends React.Component {
         this.setState({
             [name] : value
         });
+    }
+
+    handleCheckbox() {
+        if (this.state.periodic) {
+            this.setState({periodic: false});
+        }
+        else {
+            this.setState({periodic: true});
+        }
     }
 
     handleClub(event) {
@@ -65,7 +75,7 @@ class CostForm extends React.Component {
     render() {
         return (
             <div className="container">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="payerId">What is your name?</label>
                         <select className="form-control" id="payerId" name="payerId" onChange={this.handleChange}>
@@ -95,7 +105,17 @@ class CostForm extends React.Component {
                             }
                         </select>
                     </div>
-                    <button className="btn btn-primary" type="submit" key="submit" onClick={this.handleSubmit}>Submit</button>
+                    <div className="form-check" key="periodic">
+                        <input className="form-check-input" id="periodic" type="checkbox" name="periodic" onChange={this.handleCheckbox} defaultChecked={this.state.periodic}></input>
+                        <label className="form-check-label" htmlFor="periodic">Do you want to pay it off in terms?</label>
+                    </div>
+                    {this.state.periodic &&
+                        <div className="form-group" key="duration" style={{marginTop: '20px'}}>
+                            <label htmlFor="duration">Over how many months would you like to pay it off?</label>
+                            <input className="form-control" id="duration" type="number" name="durationMonths" min="0" step="1" onChange={this.handleChange}></input>
+                        </div>
+                    }
+                    <button className="btn btn-primary" type="submit" key="submit">Submit</button>
                 </form>
             </div>
         );
