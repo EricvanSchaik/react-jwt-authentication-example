@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { performFetch } from '@/_services';
+import "./AccountingsPage.css";
 
 class AccountingsPage extends React.Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class AccountingsPage extends React.Component {
             <div className="container">
                 { accountings && <h2>Accounting of {this.state.accountings[currentAccounting].month} - {this.state.accountings[currentAccounting].year}</h2>}
                 { accountings && users && 
-                    <table className="table">
+                    <table className="table table-bordered">
                         <thead>
                             <tr>
                                 <th>User</th>
